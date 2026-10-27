@@ -1,0 +1,23 @@
+info:
+  name: Create new student
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: http://localhost:3000/students
+  body:
+    type: json
+    data: |-
+      {
+        "name": "Cho Chang",
+        "year": "2",
+        "house_id": 3
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
