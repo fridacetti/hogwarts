@@ -1,9 +1,9 @@
 import "dotenv/config";
 import express from "express";
-import housesRoutes from "./routes/houses.routes";
-import teachersRoutes from "./routes/teachers.routes";
-import studentsRoutes from "./routes/students.routes";
-import coursesRoutes from "./routes/courses.routes";
+import housesRoutes from "./routes/houses.routes.js";
+import teachersRoutes from "./routes/teachers.routes.js";
+import studentsRoutes from "./routes/students.routes.js";
+import coursesRoutes from "./routes/courses.routes.js";
 
 const app = express();
 app.use(express.json());

@@ -1,4 +1,4 @@
-import * as coursesRepository from "../repositories/courses.repository
+import * as coursesRepository from "../repositories/courses.repository.js";
 
 // GET /courses - henter alle courses
 export async function getAllCourses(req, res){

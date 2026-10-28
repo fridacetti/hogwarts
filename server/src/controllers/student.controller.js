@@ -1,4 +1,4 @@
-import * as studentsRepository from "../repositories/students.repository";
+import * as studentsRepository from "../repositories/students.repository.js";
 
 // GET /students - henter alle students
 export async function getAllStudents(req, res) {
