@@ -1,4 +1,4 @@
-import * as teacherRepository from "../repositories/teachers.repository.js";
+import * as teachersRepository from "../repositories/teachers.repository.js";
 
 export async function getAllTeachers(req, res) {
   try {
