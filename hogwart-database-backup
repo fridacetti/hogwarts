@@ -223,7 +223,6 @@ INSERT INTO hogwarts.students OVERRIDING SYSTEM VALUE VALUES (2, 'Hermione Grang
 INSERT INTO hogwarts.students OVERRIDING SYSTEM VALUE VALUES (3, 'Cedric Diggory', 2, 2);
 INSERT INTO hogwarts.students OVERRIDING SYSTEM VALUE VALUES (5, 'Draco Malfoy', 1, 4);
 INSERT INTO hogwarts.students OVERRIDING SYSTEM VALUE VALUES (8, 'Cho Chang', 2, 3);
-INSERT INTO hogwarts.students OVERRIDING SYSTEM VALUE VALUES (9, 'Cho Chang', 2, 3);
 INSERT INTO hogwarts.students OVERRIDING SYSTEM VALUE VALUES (4, 'Luna Lovegood', 2, 3);
 
 
@@ -235,7 +234,6 @@ INSERT INTO hogwarts.students OVERRIDING SYSTEM VALUE VALUES (4, 'Luna Lovegood'
 
 INSERT INTO hogwarts.teachers OVERRIDING SYSTEM VALUE VALUES (2, 'Pomona Sprout', 2);
 INSERT INTO hogwarts.teachers OVERRIDING SYSTEM VALUE VALUES (4, 'Severus Snape', 4);
-INSERT INTO hogwarts.teachers OVERRIDING SYSTEM VALUE VALUES (6, 'Remus Lupin', 1);
 INSERT INTO hogwarts.teachers OVERRIDING SYSTEM VALUE VALUES (7, 'Remus Lupin', 1);
 INSERT INTO hogwarts.teachers OVERRIDING SYSTEM VALUE VALUES (3, 'Minerva McGonagall', 2);
 
