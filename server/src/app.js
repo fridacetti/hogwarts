@@ -9,10 +9,10 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/houses", housesRoutes);
-app.use("/teachers", teachersRoutes);
-app.use("/students", studentsRoutes);
-app.use("/courses", coursesRoutes);
+app.use("/houses", housesRoutes); // sender alle requests med /houses, videre til housesRoutes
+app.use("/teachers", teachersRoutes); // sender alle requests med /teachers, videre til teachersRoutes
+app.use("/students", studentsRoutes); // sender alle requests med /students, videre til studentsRoutes
+app.use("/courses", coursesRoutes); // sender alle requests med /courses, videre til coursesRoutes
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

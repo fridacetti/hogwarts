@@ -27,32 +27,25 @@ export async function createCourse(name, teacher_id) {
 
 // erstat eksisterende data
 export async function updatedCourse(id, name, teacher_id) {
-  const updated = await pool.query("UPDATE courses SET name = $1, teacher_id = $2 WHERE id = $3 RETURNING *", [name, teacher_id, id]);
+  const updated = await pool.query("UPDATE courses SET name = $1, teacher_id = $2 WHERE id = $3 RETURNING *", [name, teacher_id, id]); // opdaterer navn og lærer på det course, hvor id matcher
 
   if (updated.rowCount === 0) {
-    return null;
+    // ingen rækker blev opdateret, så course findes ikke
+    return null; // returnerer null, så controlleren kan sende 404
   } else {
-    return updated.rows[0];
+    return updated.rows[0]; // returnerer det opdaterede course
   }
 }
 
 // slet en courses
 export async function deleteCourse(id) {
-  const client = await pool.connect();
+  const deleted = await pool.query("DELETE FROM courses WHERE id = $1 RETURNING *", [id]); // sletter course
 
-  try {
-    await client.query("BEGIN");
-    await client.query("DELETE FROM courses_students WHERE course_id = $1", [id]);
-
-    const deleted = await client.query("DELETE FROM courses WHERE id = $1 RETURNING *", [id]);
-
-    await client.query("COMMIT");
-    return deleted.rows[0] ?? null;
-  } catch (err) {
-    await client.query("ROLLBACK");
-    throw err;
-  } finally {
-    client.release();
+  if (deleted.rowCount === 0) {
+    // ingen rækker blev slettet, så course findes ikke
+    return null; // returnerer null, så controlleren kan sende 404
+  } else {
+    return deleted.rows[0]; // returnerer det slettede course
   }
 }
 
@@ -66,10 +59,12 @@ export async function setCourseTeacher(courseId, teacherId) {
   }
 }
 
+// tilføj student til course
 export async function addStudentToCourse(courseId, studentId) {
   await pool.query("INSERT INTO courses_students (course_id, student_id) VALUES ($1, $2) ON CONFLICT DO NOTHING", [courseId, studentId]); // ON CONFLICT DO NOTHING = ingen fejl, hvis koblingen allerede findes
 }
 
+// sletter student fra course
 export async function removeStudentFromCourse(courseId, studentId) {
   const removed = await pool.query("DELETE FROM courses_students WHERE course_id = $1 AND student_id = $2", [courseId, studentId]);
   return removed.rowCount > 0; // true hvis noget blev slettet, false hvis koblingen ikke fandtes

@@ -1,0 +1,376 @@
+--
+-- PostgreSQL database dump
+--
+
+\restrict 4ngEWOXsoFzSO5vQvTCDRvhzKaz7Pxem2r8XFYMVK8qQo4sWM4ZX7RPbjM9vuhE
+
+-- Dumped from database version 18.6
+-- Dumped by pg_dump version 18.6
+
+-- Started on 2026-10-30 17:15:09 CET
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET transaction_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 5 (class 2615 OID 2200)
+-- Name: hogwarts; Type: SCHEMA; Schema: -; Owner: pg_database_owner
+--
+
+CREATE SCHEMA hogwarts;
+
+
+ALTER SCHEMA hogwarts OWNER TO pg_database_owner;
+
+--
+-- TOC entry 3758 (class 0 OID 0)
+-- Dependencies: 5
+-- Name: SCHEMA hogwarts; Type: COMMENT; Schema: -; Owner: pg_database_owner
+--
+
+COMMENT ON SCHEMA hogwarts IS 'standard public schema';
+
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 226 (class 1259 OID 16625)
+-- Name: courses; Type: TABLE; Schema: hogwarts; Owner: postgres
+--
+
+CREATE TABLE hogwarts.courses (
+    id integer NOT NULL,
+    name text NOT NULL,
+    teacher_id integer NOT NULL
+);
+
+
+ALTER TABLE hogwarts.courses OWNER TO postgres;
+
+--
+-- TOC entry 225 (class 1259 OID 16624)
+-- Name: courses_id_seq; Type: SEQUENCE; Schema: hogwarts; Owner: postgres
+--
+
+ALTER TABLE hogwarts.courses ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME hogwarts.courses_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 227 (class 1259 OID 16640)
+-- Name: courses_students; Type: TABLE; Schema: hogwarts; Owner: postgres
+--
+
+CREATE TABLE hogwarts.courses_students (
+    course_id integer NOT NULL,
+    student_id integer NOT NULL
+);
+
+
+ALTER TABLE hogwarts.courses_students OWNER TO postgres;
+
+--
+-- TOC entry 220 (class 1259 OID 16582)
+-- Name: houses; Type: TABLE; Schema: hogwarts; Owner: postgres
+--
+
+CREATE TABLE hogwarts.houses (
+    id integer NOT NULL,
+    name text NOT NULL,
+    colors text NOT NULL,
+    founder text NOT NULL
+);
+
+
+ALTER TABLE hogwarts.houses OWNER TO postgres;
+
+--
+-- TOC entry 219 (class 1259 OID 16581)
+-- Name: houses_id_seq; Type: SEQUENCE; Schema: hogwarts; Owner: postgres
+--
+
+ALTER TABLE hogwarts.houses ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME hogwarts.houses_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 224 (class 1259 OID 16610)
+-- Name: students; Type: TABLE; Schema: hogwarts; Owner: postgres
+--
+
+CREATE TABLE hogwarts.students (
+    id integer NOT NULL,
+    name text NOT NULL,
+    year integer,
+    house_id integer
+);
+
+
+ALTER TABLE hogwarts.students OWNER TO postgres;
+
+--
+-- TOC entry 223 (class 1259 OID 16609)
+-- Name: students_id_seq; Type: SEQUENCE; Schema: hogwarts; Owner: postgres
+--
+
+ALTER TABLE hogwarts.students ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME hogwarts.students_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 222 (class 1259 OID 16594)
+-- Name: teachers; Type: TABLE; Schema: hogwarts; Owner: postgres
+--
+
+CREATE TABLE hogwarts.teachers (
+    id integer NOT NULL,
+    name text NOT NULL,
+    house_id integer NOT NULL
+);
+
+
+ALTER TABLE hogwarts.teachers OWNER TO postgres;
+
+--
+-- TOC entry 221 (class 1259 OID 16593)
+-- Name: teachers_id_seq; Type: SEQUENCE; Schema: hogwarts; Owner: postgres
+--
+
+ALTER TABLE hogwarts.teachers ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME hogwarts.teachers_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 3751 (class 0 OID 16625)
+-- Dependencies: 226
+-- Data for Name: courses; Type: TABLE DATA; Schema: hogwarts; Owner: postgres
+--
+
+INSERT INTO hogwarts.courses OVERRIDING SYSTEM VALUE VALUES (2, 'Herbology', 2);
+INSERT INTO hogwarts.courses OVERRIDING SYSTEM VALUE VALUES (4, 'Potions', 4);
+INSERT INTO hogwarts.courses OVERRIDING SYSTEM VALUE VALUES (1, 'Transfiguration', 2);
+
+
+--
+-- TOC entry 3752 (class 0 OID 16640)
+-- Dependencies: 227
+-- Data for Name: courses_students; Type: TABLE DATA; Schema: hogwarts; Owner: postgres
+--
+
+INSERT INTO hogwarts.courses_students VALUES (1, 1);
+INSERT INTO hogwarts.courses_students VALUES (1, 5);
+INSERT INTO hogwarts.courses_students VALUES (2, 3);
+INSERT INTO hogwarts.courses_students VALUES (2, 2);
+INSERT INTO hogwarts.courses_students VALUES (4, 1);
+INSERT INTO hogwarts.courses_students VALUES (4, 5);
+
+
+--
+-- TOC entry 3745 (class 0 OID 16582)
+-- Dependencies: 220
+-- Data for Name: houses; Type: TABLE DATA; Schema: hogwarts; Owner: postgres
+--
+
+INSERT INTO hogwarts.houses OVERRIDING SYSTEM VALUE VALUES (1, 'Gryffindor', 'Scarlet and gold', 'Godric Gryffindor');
+INSERT INTO hogwarts.houses OVERRIDING SYSTEM VALUE VALUES (2, 'Hufflepuff', 'Yellow and black', 'Helga Hufflepuff');
+INSERT INTO hogwarts.houses OVERRIDING SYSTEM VALUE VALUES (3, 'Ravenclaw', 'Blue and bronze', 'Rowena Ravenclaw');
+INSERT INTO hogwarts.houses OVERRIDING SYSTEM VALUE VALUES (4, 'Slytherin', 'Green and silver', 'Salazar Slytherin');
+
+
+--
+-- TOC entry 3749 (class 0 OID 16610)
+-- Dependencies: 224
+-- Data for Name: students; Type: TABLE DATA; Schema: hogwarts; Owner: postgres
+--
+
+INSERT INTO hogwarts.students OVERRIDING SYSTEM VALUE VALUES (1, 'Harry Potter', 1, 1);
+INSERT INTO hogwarts.students OVERRIDING SYSTEM VALUE VALUES (2, 'Hermione Granger', 1, 1);
+INSERT INTO hogwarts.students OVERRIDING SYSTEM VALUE VALUES (3, 'Cedric Diggory', 2, 2);
+INSERT INTO hogwarts.students OVERRIDING SYSTEM VALUE VALUES (5, 'Draco Malfoy', 1, 4);
+INSERT INTO hogwarts.students OVERRIDING SYSTEM VALUE VALUES (8, 'Cho Chang', 2, 3);
+INSERT INTO hogwarts.students OVERRIDING SYSTEM VALUE VALUES (9, 'Cho Chang', 2, 3);
+INSERT INTO hogwarts.students OVERRIDING SYSTEM VALUE VALUES (4, 'Luna Lovegood', 2, 3);
+
+
+--
+-- TOC entry 3747 (class 0 OID 16594)
+-- Dependencies: 222
+-- Data for Name: teachers; Type: TABLE DATA; Schema: hogwarts; Owner: postgres
+--
+
+INSERT INTO hogwarts.teachers OVERRIDING SYSTEM VALUE VALUES (2, 'Pomona Sprout', 2);
+INSERT INTO hogwarts.teachers OVERRIDING SYSTEM VALUE VALUES (4, 'Severus Snape', 4);
+INSERT INTO hogwarts.teachers OVERRIDING SYSTEM VALUE VALUES (6, 'Remus Lupin', 1);
+INSERT INTO hogwarts.teachers OVERRIDING SYSTEM VALUE VALUES (7, 'Remus Lupin', 1);
+INSERT INTO hogwarts.teachers OVERRIDING SYSTEM VALUE VALUES (3, 'Minerva McGonagall', 2);
+
+
+--
+-- TOC entry 3759 (class 0 OID 0)
+-- Dependencies: 225
+-- Name: courses_id_seq; Type: SEQUENCE SET; Schema: hogwarts; Owner: postgres
+--
+
+SELECT pg_catalog.setval('hogwarts.courses_id_seq', 27, true);
+
+
+--
+-- TOC entry 3760 (class 0 OID 0)
+-- Dependencies: 219
+-- Name: houses_id_seq; Type: SEQUENCE SET; Schema: hogwarts; Owner: postgres
+--
+
+SELECT pg_catalog.setval('hogwarts.houses_id_seq', 4, true);
+
+
+--
+-- TOC entry 3761 (class 0 OID 0)
+-- Dependencies: 223
+-- Name: students_id_seq; Type: SEQUENCE SET; Schema: hogwarts; Owner: postgres
+--
+
+SELECT pg_catalog.setval('hogwarts.students_id_seq', 10, true);
+
+
+--
+-- TOC entry 3762 (class 0 OID 0)
+-- Dependencies: 221
+-- Name: teachers_id_seq; Type: SEQUENCE SET; Schema: hogwarts; Owner: postgres
+--
+
+SELECT pg_catalog.setval('hogwarts.teachers_id_seq', 8, true);
+
+
+--
+-- TOC entry 3589 (class 2606 OID 16634)
+-- Name: courses courses_pkey; Type: CONSTRAINT; Schema: hogwarts; Owner: postgres
+--
+
+ALTER TABLE ONLY hogwarts.courses
+    ADD CONSTRAINT courses_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3591 (class 2606 OID 16646)
+-- Name: courses_students courses_students_pkey; Type: CONSTRAINT; Schema: hogwarts; Owner: postgres
+--
+
+ALTER TABLE ONLY hogwarts.courses_students
+    ADD CONSTRAINT courses_students_pkey PRIMARY KEY (course_id, student_id);
+
+
+--
+-- TOC entry 3583 (class 2606 OID 16592)
+-- Name: houses houses_pkey; Type: CONSTRAINT; Schema: hogwarts; Owner: postgres
+--
+
+ALTER TABLE ONLY hogwarts.houses
+    ADD CONSTRAINT houses_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3587 (class 2606 OID 16618)
+-- Name: students students_pkey; Type: CONSTRAINT; Schema: hogwarts; Owner: postgres
+--
+
+ALTER TABLE ONLY hogwarts.students
+    ADD CONSTRAINT students_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3585 (class 2606 OID 16603)
+-- Name: teachers teachers_pkey; Type: CONSTRAINT; Schema: hogwarts; Owner: postgres
+--
+
+ALTER TABLE ONLY hogwarts.teachers
+    ADD CONSTRAINT teachers_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3594 (class 2606 OID 16635)
+-- Name: courses c_t_id_fk; Type: FK CONSTRAINT; Schema: hogwarts; Owner: postgres
+--
+
+ALTER TABLE ONLY hogwarts.courses
+    ADD CONSTRAINT c_t_id_fk FOREIGN KEY (teacher_id) REFERENCES hogwarts.teachers(id);
+
+
+--
+-- TOC entry 3595 (class 2606 OID 16657)
+-- Name: courses_students course_id_fk; Type: FK CONSTRAINT; Schema: hogwarts; Owner: postgres
+--
+
+ALTER TABLE ONLY hogwarts.courses_students
+    ADD CONSTRAINT course_id_fk FOREIGN KEY (course_id) REFERENCES hogwarts.courses(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3593 (class 2606 OID 16619)
+-- Name: students s_h_id_fk; Type: FK CONSTRAINT; Schema: hogwarts; Owner: postgres
+--
+
+ALTER TABLE ONLY hogwarts.students
+    ADD CONSTRAINT s_h_id_fk FOREIGN KEY (house_id) REFERENCES hogwarts.houses(id);
+
+
+--
+-- TOC entry 3596 (class 2606 OID 16652)
+-- Name: courses_students student_id_fk; Type: FK CONSTRAINT; Schema: hogwarts; Owner: postgres
+--
+
+ALTER TABLE ONLY hogwarts.courses_students
+    ADD CONSTRAINT student_id_fk FOREIGN KEY (student_id) REFERENCES hogwarts.students(id);
+
+
+--
+-- TOC entry 3592 (class 2606 OID 16604)
+-- Name: teachers t_h_id_fk; Type: FK CONSTRAINT; Schema: hogwarts; Owner: postgres
+--
+
+ALTER TABLE ONLY hogwarts.teachers
+    ADD CONSTRAINT t_h_id_fk FOREIGN KEY (house_id) REFERENCES hogwarts.houses(id);
+
+
+-- Completed on 2026-10-30 17:15:09 CET
+
+--
+-- PostgreSQL database dump complete
+--
+
+\unrestrict 4ngEWOXsoFzSO5vQvTCDRvhzKaz7Pxem2r8XFYMVK8qQo4sWM4ZX7RPbjM9vuhE
+
